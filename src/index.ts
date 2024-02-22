@@ -1,14 +1,12 @@
-require('dotenv').config();
-
+import dotenv from 'dotenv';
 import express from 'express';
+import { connectToDatabase } from "./db/connection";
 
-const connectToDatabase = require("./src/db")
-
+dotenv.config();
 const app = express();
 const port = process.env.PORT || 3000;
 
 app.use(express.json());
-
 
 connectToDatabase();
 
