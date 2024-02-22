@@ -1,6 +1,8 @@
 import mongoose from "mongoose";
 
-async function connectToDatabase() {
+const serverSelectionTimeoutMS = 5000;
+
+export async function connectToDatabase() {
     try {
         const user = process.env.DB_USER;
         const password = process.env.DB_PASSWORD;
@@ -9,12 +11,12 @@ async function connectToDatabase() {
         const dbName = process.env.DB_NAME;
         
         const connectionUrl = `mongodb://${user}:${password}@${host}:${port}/${dbName}`;
-        await mongoose.connect(connectionUrl);
+        await mongoose.connect(connectionUrl, {
+            serverSelectionTimeoutMS
+        });
 
         console.log("Connected to Database!");
     } catch (error) {
         console.log(error);
     }
 }
-
-module.exports = connectToDatabase;
