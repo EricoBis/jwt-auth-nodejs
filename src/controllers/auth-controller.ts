@@ -16,7 +16,7 @@ export const loginController = async (req: Request, res: Response) => {
             return res.status(401).json({ error: 'Authentication failed' });
 
         const accessToken = createAccessToken(user.id);
-        res.status(200).json({ accessToken });
+        res.status(200).json({ userId: user.id, accessToken });
 
     } catch (error) {
         res.status(500).json({ error: 'Login failed' });
